@@ -1,0 +1,30 @@
+{
+    "name": "viloveul/console",
+    "description": "Viloveul Console Application based on Symfony Console",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["zafex", "viloveul", "fajrulaz", "console", "component", "library"],
+    "homepage": "http://www.viloveul.com",
+    "readme": "README.MD",
+    "authors": [{
+        "name": "Fajrul Akbar Zuhdi",
+        "email": "fajrulaz@gmail.com"
+    }],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": "~7.0",
+        "ext-zip": "*",
+        "symfony/console": "~3.4|~4.0",
+        "viloveul/config": "v1.*|v1.x-dev",
+        "viloveul/container": "v1.*|v1.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Viloveul\\Console\\": "src/"
+        }
+    }
+}
