@@ -46,8 +46,8 @@ class ZipCommand extends Command
     public function handle()
     {
         $workdir = defined('VILOVEUL_WORKDIR') ? VILOVEUL_WORKDIR : $this->config->get('root');
-        $ignores = $this->input->getOption('ignore');
-        $name = $this->input->getOption('output');
+        $ignores = $this->getOption('ignore');
+        $name = $this->getOption('output');
 
         $zip = new ZipArchive();
         if ($zip->open($workdir . DIRECTORY_SEPARATOR . $name, ZipArchive::CREATE) === true) {

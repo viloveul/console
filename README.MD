@@ -18,7 +18,11 @@ class MyCommand extends Viloveul\Console\Command
 
     public function handle()
     {
-        $this->output->writeLn('Hello World');
+        $this->writeNormal('Hello World');
+        $this->writeInfo('Hello World');
+        $this->writeError('Hello World');
+        $this->writeQuestion('Hello World');
+        $this->writeComment('Hello World');
     }
 }
 
