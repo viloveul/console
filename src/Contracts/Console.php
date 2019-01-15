@@ -2,7 +2,9 @@
 
 namespace Viloveul\Console\Contracts;
 
-interface Console
+use Viloveul\Container\Contracts\Injector;
+
+interface Console extends Injector
 {
     public function boot(): void;
 }

@@ -2,9 +2,7 @@
 
 namespace Viloveul\Console;
 
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
 use Viloveul\Config\Contracts\Configuration as IConfiguration;
 use Viloveul\Console\Command;
 use ZipArchive;
@@ -45,6 +43,20 @@ class ZipCommand extends Command
         );
     }
 
+    public function handle()
+    {
+        $workdir = defined('VILOVEUL_WORKDIR') ? VILOVEUL_WORKDIR : $this->config->get('root');
+        $ignores = $this->input->getOption('ignore');
+        $name = $this->input->getOption('output');
+
+        $zip = new ZipArchive();
+        if ($zip->open($workdir . DIRECTORY_SEPARATOR . $name, ZipArchive::CREATE) === true) {
+            array_push($ignores, $name);
+            $this->deepRecursive($zip, $workdir, $ignores);
+            $zip->close();
+        }
+    }
+
     /**
      * @param $zip
      * @param $workdir
@@ -64,24 +76,6 @@ class ZipCommand extends Command
                 $zip->addEmptyDir(str_replace($workdir, '', $result));
                 $this->deepRecursive($zip, $workdir, $ignores, str_replace($workdir, '', $result));
             }
-        }
-    }
-
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $workdir = defined('VILOVEUL_WORKDIR') ? VILOVEUL_WORKDIR : $this->config->get('root');
-        $ignores = $input->getOption('ignore');
-        $name = $input->getOption('output');
-
-        $zip = new ZipArchive();
-        if ($zip->open($workdir . DIRECTORY_SEPARATOR . $name, ZipArchive::CREATE) === true) {
-            array_push($ignores, $name);
-            $this->deepRecursive($zip, $workdir, $ignores);
-            $zip->close();
         }
     }
 }
