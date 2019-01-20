@@ -2,9 +2,9 @@
 
 namespace Viloveul\Console\Contracts;
 
-use Viloveul\Container\Contracts\Injector;
+use Viloveul\Container\Contracts\ContainerAware;
 
-interface Console extends Injector
+interface Console extends ContainerAware
 {
     public function boot(): void;
 }
