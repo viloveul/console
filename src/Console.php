@@ -7,11 +7,11 @@ use Viloveul\Config\Configuration;
 use Viloveul\Config\Contracts\Configuration as IConfiguration;
 use Viloveul\Console\Contracts\Console as IConsole;
 use Viloveul\Console\ZipCommand;
-use Viloveul\Container\ContainerInjectorTrait;
+use Viloveul\Container\ContainerAwareTrait;
 
 class Console extends SymfonyConsole implements IConsole
 {
-    use ContainerInjectorTrait;
+    use ContainerAwareTrait;
 
     public function boot(): void
     {
@@ -27,7 +27,7 @@ class Console extends SymfonyConsole implements IConsole
         }
         $this->setName($container->get(IConfiguration::class)->get('name', 'Viloveul'));
         $this->setVersion($container->get(IConfiguration::class)->get('version', '1.0'));
-        $this->add($container->factory(ZipCommand::class));
+        $this->add($container->make(ZipCommand::class));
         if ($commands = $container->get(IConfiguration::class)->get('commands')) {
             foreach ($commands as $class) {
                 if (is_callable($class)) {
@@ -35,7 +35,7 @@ class Console extends SymfonyConsole implements IConsole
                 } elseif (is_object($class)) {
                     $this->add($class);
                 } else {
-                    $this->add($container->factory($class));
+                    $this->add($container->make($class));
                 }
             }
         }

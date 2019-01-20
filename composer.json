@@ -22,6 +22,9 @@
         "viloveul/config": "v1.*|v1.x-dev",
         "viloveul/container": "v1.*|v1.x-dev"
     },
+    "require-dev": {
+        "viloveul/support": "v1.*|v1.x-dev"
+    },
     "autoload": {
         "psr-4": {
             "Viloveul\\Console\\": "src/"
