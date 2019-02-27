@@ -17,7 +17,7 @@ class ZipCommand extends Command
     /**
      * @param IConfiguration $config
      */
-    public function __construct(string $name = 'build-zip', IConfiguration $config = null)
+    public function __construct(string $name = 'builder:zip', IConfiguration $config = null)
     {
         parent::__construct($name);
         $this->setDescription('Build zip archive for your working directory.');
