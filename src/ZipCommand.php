@@ -2,10 +2,10 @@
 
 namespace Viloveul\Console;
 
+use ZipArchive;
+use Viloveul\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Viloveul\Config\Contracts\Configuration as IConfiguration;
-use Viloveul\Console\Command;
-use ZipArchive;
 
 class ZipCommand extends Command
 {
@@ -17,7 +17,7 @@ class ZipCommand extends Command
     /**
      * @param IConfiguration $config
      */
-    public function __construct(string $name = 'builder:zip', IConfiguration $config = null)
+    public function __construct(string $name = 'zip:this', IConfiguration $config = null)
     {
         parent::__construct($name);
         $this->setDescription('Build zip archive for your working directory.');
