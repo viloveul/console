@@ -2,12 +2,12 @@
 
 namespace Viloveul\Console;
 
-use Symfony\Component\Console\Application as SymfonyConsole;
-use Viloveul\Config\Configuration;
-use Viloveul\Config\Contracts\Configuration as IConfiguration;
-use Viloveul\Console\Contracts\Console as IConsole;
 use Viloveul\Console\ZipCommand;
+use Viloveul\Config\Configuration;
 use Viloveul\Container\ContainerAwareTrait;
+use Viloveul\Console\Contracts\Console as IConsole;
+use Symfony\Component\Console\Application as SymfonyConsole;
+use Viloveul\Config\Contracts\Configuration as IConfiguration;
 
 class Console extends SymfonyConsole implements IConsole
 {

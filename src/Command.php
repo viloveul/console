@@ -2,10 +2,10 @@
 
 namespace Viloveul\Console;
 
-use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Viloveul\Console\Contracts\Command as ICommand;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
 abstract class Command extends SymfonyCommand implements ICommand
 {
@@ -25,7 +25,7 @@ abstract class Command extends SymfonyCommand implements ICommand
      */
     public function getArgument(string $key = null)
     {
-        if (is_null($key)) {
+        if (null === $key) {
             return $this->getArguments();
         }
         return $this->input->getArgument($key);
@@ -53,7 +53,7 @@ abstract class Command extends SymfonyCommand implements ICommand
      */
     public function getOption(string $key = null)
     {
-        if (is_null($key)) {
+        if (null === $key) {
             return $this->getOptions();
         }
 
