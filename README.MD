@@ -14,8 +14,6 @@ require __DIR__ . '/vendor/autoload.php';
 
 class MyCommand extends Viloveul\Console\Command
 {
-    protected static $defaultName = 'hello';
-
     public function handle()
     {
         $this->writeNormal('Hello World');
@@ -30,7 +28,8 @@ $console = new Viloveul\Console\Console();
 $console->boot();
 
 // add command
-$console->add(new MyCommand);
+$cmd = new MyCommand("hello");
+$console->add($cmd);
 
 // run
 $console->run();

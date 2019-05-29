@@ -25,18 +25,22 @@ class Console extends SymfonyConsole implements IConsole
                 ]);
             });
         }
+
+        $zip = $container->make(ZipCommand::class, [
+            'name' => 'v:zip',
+        ]);
+        $zip->setDescription('Build zip archive for your working directory.');
+
         $this->setName($container->get(IConfiguration::class)->get('name', 'Viloveul'));
         $this->setVersion($container->get(IConfiguration::class)->get('version', '1.0'));
-        $this->add($container->make(ZipCommand::class));
+        $this->add($zip);
+
         if ($commands = $container->get(IConfiguration::class)->get('commands')) {
-            foreach ($commands as $class) {
-                if (is_callable($class)) {
-                    $this->add($container->invoke($class));
-                } elseif (is_object($class)) {
-                    $this->add($class);
-                } else {
-                    $this->add($container->make($class));
-                }
+            foreach ($commands as $name => $class) {
+                $cmd = $container->make($class, [
+                    'name' => $name,
+                ]);
+                $this->add($cmd);
             }
         }
     }

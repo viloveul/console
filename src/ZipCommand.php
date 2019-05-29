@@ -4,25 +4,14 @@ namespace Viloveul\Console;
 
 use ZipArchive;
 use Viloveul\Console\Command;
+use Viloveul\Container\ContainerAwareTrait;
 use Symfony\Component\Console\Input\InputOption;
 use Viloveul\Config\Contracts\Configuration as IConfiguration;
+use Viloveul\Container\Contracts\ContainerAware as IContainerAware;
 
-class ZipCommand extends Command
+class ZipCommand extends Command implements IContainerAware
 {
-    /**
-     * @var mixed
-     */
-    protected $config;
-
-    /**
-     * @param IConfiguration $config
-     */
-    public function __construct(string $name = 'zip:this', IConfiguration $config = null)
-    {
-        parent::__construct($name);
-        $this->setDescription('Build zip archive for your working directory.');
-        $this->config = $config;
-    }
+    use ContainerAwareTrait;
 
     public function configure()
     {
@@ -45,7 +34,11 @@ class ZipCommand extends Command
 
     public function handle()
     {
-        $workdir = defined('VILOVEUL_WORKDIR') ? VILOVEUL_WORKDIR : $this->config->get('root');
+        if (defined('VILOVEUL_WORKDIR')) {
+            $workdir = VILOVEUL_WORKDIR;
+        } else {
+            $workdir = $this->getContainer()->get(IConfiguration::class)->get('root');
+        }
         $ignores = $this->getOption('ignore');
         $name = $this->getOption('output');
 
