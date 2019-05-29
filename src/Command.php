@@ -2,6 +2,7 @@
 
 namespace Viloveul\Console;
 
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Viloveul\Console\Contracts\Command as ICommand;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -92,6 +93,14 @@ abstract class Command extends SymfonyCommand implements ICommand
     public function hasOption(string $name): bool
     {
         return $this->input->hasOption($name);
+    }
+
+    /**
+     * @param int $unit
+     */
+    public function newProgressBar(int $unit = 10): ProgressBar
+    {
+        return new ProgressBar($this->getOutput(), $unit);
     }
 
     /**

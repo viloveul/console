@@ -2,6 +2,7 @@
 
 namespace Viloveul\Console\Contracts;
 
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -36,6 +37,8 @@ interface Command
      * @param string $name
      */
     public function hasOption(string $name): bool;
+
+    public function newProgressBar(int $unit = 10): ProgressBar;
 
     /**
      * @param InputInterface $input
