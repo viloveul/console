@@ -17,7 +17,6 @@
     },
     "require": {
         "php": "~7.0",
-        "ext-zip": "*",
         "symfony/console": "~3.4|~4.0",
         "viloveul/config": "v1.*|v1.x-dev",
         "viloveul/container": "v1.*|v1.x-dev"
